@@ -3,6 +3,14 @@
 #include <string.h>
 #include <unistd.h>
 #include main.h
+
+/**
+* _printf - all of the logic for the printf project.
+* @format: string specifier formats.
+*
+* Return: Gives The length(char_num++).
+*/
+
 int _printf(const char *format, ...){
 
 	va_list ars;
