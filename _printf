@@ -3,52 +3,50 @@
 #include <string.h>
 #include <unistd.h>
 #include main.h
-
 int _printf(const char *format, ...){
 
 	va_list ars;
 	va_start(ars, format);
+	int i ;
+	i=0;
 
-	while (*format) {
+		while (*format) {
 		if (*format == '%') {
 		format++;
-		switch (*format){
-		case 'c':
-		{
-		char ch = va_arg(ars, int);
-		write(1, &ch, 1);
-		break;
+		if (*format == 'c') {
+
+			char ch = va_arg(ars, int);
+			write(1, &ch, 1);
+			i++;
+
+			}else if (*format == 's') {
+			const char *st = va_arg(ars, const char *);
+			i += write(1, st, strlen(st));
 		}
-
-		case 's':
-		{
-		const char *st = va_arg(ars, const char *);
-			write(1, st, strlen(st));
-			break;
-		}
-
-		case '%':
-		write(1, "%", 1);
-		break;
-
-		default:
+			else if (*format == '%') {
 			write(1, "%", 1);
-			write(1, format, 1);
-			break;
+			i++;
 		}
-		}
+		else {
+		write(1, "%", 1);
+		write(1, format, 1);
+		i +=2;
+	}
+	}
 	else
 	{
-	write(1, format, 1);
+		write(1, format, 1);
+	i++;
 	}
-	format++;
+		format++;
 	}
-        va_end(ars);
+	va_end(ars);
+	return i;
+
 }
 
 int main(void) {
 
 	_printf("welcome: %c %c %c, String: %s", 'A', 'B', 'C', "How are you");
-
 	return 0;
 }
