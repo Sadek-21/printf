@@ -26,14 +26,7 @@ int _printf(const char *format, ...)
 			{
 				char c = va_arg(ars, int);
 
-				if (c == '\0')
-				{
-					_putchar('*');
-				}
-				else
-				{
-					_putchar(c);
-				}
+				_putchar(c);
 				format += 2; /* move past '%c' */
 				count++;
 			}
