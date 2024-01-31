@@ -26,9 +26,12 @@ int _printf(const char *format, ...)
 			{
 				char c = va_arg(ars, int);
 
-				_putchar(c);
-				format += 2; /* move past '%c' */
-				count++;
+				if (c != '\0')
+				{
+					_putchar(c);
+					format += 2; /* move past '%c' */
+					count++;
+				}
 			}
 			else if (*(format + 1) == 's')
 			{
