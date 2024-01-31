@@ -33,6 +33,16 @@ int _printf(const char *format, ...)
 			else if (*(format + 1) == 's')
 			{
 				char *str = va_arg(ars, char *);
+				if (str == NULL)
+				{
+					str = "(nil)";
+					while (*str)
+					{
+						_putchar(*str);
+						str++;
+						count++;
+					}
+				}
 
 				while (*str)
 				{
@@ -42,6 +52,7 @@ int _printf(const char *format, ...)
 				}
 				format += 2; /* move past "%s" */
 			}
+			else if (*(format + 1)i
 			else if (*(format + 1) == '%')
 			{
 				_putchar('%');
