@@ -52,7 +52,6 @@ int _printf(const char *format, ...)
 				}
 				format += 2; /* move past "%s" */
 			}
-			else if (*(format + 1)i
 			else if (*(format + 1) == '%')
 			{
 				_putchar('%');
