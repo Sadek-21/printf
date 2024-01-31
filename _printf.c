@@ -52,6 +52,11 @@ int _printf(const char *format, ...)
 				format += 2;
 				count++;
 			}
+			else if (*(format + 1) == 'd' || *(format + 1) == 'i')
+			{
+				int num = va_arg(ars, int);
+				i += _printintdg(num);
+			}
 			else
 			{
 				/* invalid specifier or no specifier, print '%' */
