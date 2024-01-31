@@ -18,10 +18,6 @@ int _printf(const char *format, ...)
 	{
 		return (-1);
 	}
-	if (strlen(format) - 1 == '%') /* check if % is the last character */
-	{
-		return (-1);
-	}
 	while (*format)
 	{
 		if (*format == '%' && *(format + 1) != '\0')
