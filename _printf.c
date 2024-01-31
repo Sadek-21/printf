@@ -34,6 +34,10 @@ int _printf(const char *format, ...)
 			{
 				char *str = va_arg(ars, char *);
 
+				if (str == NULL)
+				{
+					str = "(null)";
+				}
 				while (*str)
 				{
 					_putchar(*str);
