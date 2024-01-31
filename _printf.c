@@ -64,10 +64,6 @@ int _printf(const char *format, ...)
 		}
 	}
 	va_end(ars);
-	if (*(format - 1) == '%')
-	{
-		return (-1); /* return -1 for an incomplete format string */
-	}
 	return (count);
 }
 
