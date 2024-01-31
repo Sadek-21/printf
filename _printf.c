@@ -16,7 +16,7 @@ int _printf(const char *format, ...)
 	va_start(ars, format);
 	if (format == NULL)
 	{
-		return (-1);
+		return (0);
 	}
 	while (*format)
 	{
@@ -64,6 +64,10 @@ int _printf(const char *format, ...)
 		}
 	}
 	va_end(ars);
+	if (*(format - 1) == '%')
+	{
+		return (-1); /* return -1 for an incomplete format string */
+	}
 	return (count);
 }
 
