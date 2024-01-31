@@ -1,62 +1,84 @@
-#include <stdio.h>
-#include <stdarg.h>
 #include <string.h>
+#include <stdarg.h>
 #include <unistd.h>
-#include "main.h"
-
+int _putchar(char c);
 /**
-* _printf - all of the logic for the printf project.
-* @format: string specifier formats.
-*
-* Return: Gives The length(char_num++).
-*/
-
+ * _printf - a simple printf()
+ * @format: format string
+ *
+ * Return: length of strings printed to console or -1 on failure
+ */
 int _printf(const char *format, ...)
 {
-	va_list	ars;
-	int	i;
+	int count = 0; /* count of printed characters */
+	va_list ars;
 
 	va_start(ars, format);
-	i = 0;
-
-		while (*format)
-		{
-		if (*format == '%')
-		{
-		format++;
-		if (*format == 'c')
-		{
-			char ch = va_arg(ars, int);
-
-			write(1, &ch, 1);
-			i++;
-
-			}
-		else if (*format == 's')
-		{
-			const char *st = va_arg(ars, const char *);
-
-			i += write(1, st, strlen(st));
-		}
-			else if (*format == '%')
+	if (format == NULL)
+	{
+		return (-1);
+	}
+	if (strlen(format) - 1 == '%') /* check if % is the last character */
+	{
+		return (-1);
+	}
+	while (*format)
+	{
+		if (*format == '%' && *(format + 1) != '\0')
+			/* handle format specifier */
+			if (*(format + 1) == 'c')
 			{
-			write(1, "%", 1);
-			i++;
+				char c = va_arg(ars, int);
+
+				_putchar(c);
+				format += 2; /* move past '%c' */
+				count++;
+			}
+			else if (*(format + 1) == 's')
+			{
+				char *str = va_arg(ars, char *);
+
+				while (*str)
+				{
+					_putchar(*str);
+					str++;
+					count++;
+				}
+				format += 2; /* move past "%s" */
+			}
+			else if (*(format + 1) == '%')
+			{
+				_putchar('%');
+				format += 2;
+				count++;
+			}
+			else
+			{
+				/* invalid specifier or no specifier, print '%' */
+				_putchar(*format);
+				format++;
+				count++;
 			}
 		else
 		{
-		write(1, "%", 1);
-		write(1, format, 1);
-		i + = 2;
+			/* regular character, print as is */
+			_putchar(*format);
+			format++;
+			count++;
 		}
 	}
-	else
-	{
-		write(1, format, 1);
-	i++;
-	}
-		format++;
-	}
 	va_end(ars);
-	return i;
+	return (count);
+}
+
+/**
+ * _putchar - writes the character c to stdout
+ * @c: the character to print
+ *
+ * Return: on success 1.
+ * On error, -1 is returned, and errno is set appropriately.
+ */
+int _putchar(char c)
+{
+	return (write(1, &c, 1));
 }
