@@ -33,16 +33,6 @@ int _printf(const char *format, ...)
 			else if (*(format + 1) == 's')
 			{
 				char *str = va_arg(ars, char *);
-				if (str == NULL)
-				{
-					str = "(nil)";
-					while (*str)
-					{
-						_putchar(*str);
-						str++;
-						count++;
-					}
-				}
 
 				while (*str)
 				{
