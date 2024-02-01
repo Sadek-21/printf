@@ -1,5 +1,27 @@
 #include "main.h"
 
+static void	ft_flag_checker(va_list args, char c, int *len)
+{
+	if (c == '%')
+		ft_putchar('%', len);
+	else if (c == 'c')
+		ft_putchar(va_arg(args, int), len);
+	else if (c == 's')
+		ft_putstr(va_arg(args, char *), len);
+	else if (c == 'u')
+		ft_putnbr(va_arg(args, unsigned int), len);
+	else if (c == 'i' || c == 'd')
+		ft_putnbr(va_arg(args, int), len);
+	else if (c == 'x' || c == 'X')
+		ft_putnbr_base(va_arg(args, unsigned long), c, len);
+	else if (c == 'p')
+	{
+		ft_putstr("0x", len);
+		ft_putnbr_base(va_arg(args, unsigned long int), c, len);
+	}
+	else
+		ft_putchar(c, len);
+}
 
 int	_printf(const char *format, ...)
 {
