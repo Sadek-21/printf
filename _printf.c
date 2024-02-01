@@ -1,15 +1,11 @@
 #include "main.h"
 
-/*
- * _flag_checker - checks and handles format specifiers for printf
- * @args: va_list containing the variable arguments
- * @c: format specifier character
- * @len: pointer to the length variable for tracking output length
- *
- * This function checks the format specifier character and calls the
- * appropriate function to handle the argument.
+/* 
+ * _flag_checker - Checks and handles format specifiers for printf.
+ * @args: va_list containing the variable arguments.
+ * @c: Format specifier character.
+ * @len: Pointer to the length variable for tracking output length.
  */
-
 static void	_flag_checker(va_list args, char c, int *len)
 {
 	if (c == '%')
