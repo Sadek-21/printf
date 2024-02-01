@@ -1,6 +1,6 @@
 #include "main.h"
 
-/* 
+/*
  * _flag_checker - Checks and handles format specifiers for printf.
  * @args: va_list containing the variable arguments.
  * @c: Format specifier character.
