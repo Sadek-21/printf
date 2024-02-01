@@ -1,89 +1,58 @@
-#include <string.h>
-#include <stdarg.h>
-#include <unistd.h>
-int _putchar(char c);
-/**
- * _printf - a simple printf()
- * @format: format string
- *
- * Return: length of strings printed to console or -1 on failure
- */
-int _printf(const char *format, ...)
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yregragu <yregragu@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/15 16:32:45 by yregragu          #+#    #+#             */
+/*   Updated: 2023/12/26 18:47:13 by yregragu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ft_printf.h"
+
+static void	ft_flag_checker(va_list args, char c, int *len)
 {
-	int count = 0; /* count of printed characters */
-	va_list ars;
-
-	va_start(ars, format);
-	if (format == NULL)
+	if (c == '%')
+		ft_putchar('%', len);
+	else if (c == 'c')
+		ft_putchar(va_arg(args, int), len);
+	else if (c == 's')
+		ft_putstr(va_arg(args, char *), len);
+	else if (c == 'u')
+		ft_putnbr(va_arg(args, unsigned int), len);
+	else if (c == 'i' || c == 'd')
+		ft_putnbr(va_arg(args, int), len);
+	else if (c == 'x' || c == 'X')
+		ft_putnbr_base(va_arg(args, unsigned long), c, len);
+	else if (c == 'p')
 	{
-		return (-1);
+		ft_putstr("0x", len);
+		ft_putnbr_base(va_arg(args, unsigned long int), c, len);
 	}
-	while (*format)
-	{
-		if (*format == '%' && *(format + 1) != '\0')
-			/* handle format specifier */
-			if (*(format + 1) == 'c')
-			{
-				char c = va_arg(ars, int);
-
-				_putchar(c);
-				format += 2; /* move past '%c' */
-				count++;
-			}
-			else if (*(format + 1) == 's')
-			{
-				char *str = va_arg(ars, char *);
-
-				if (str == NULL)
-				{
-					str = "(null)";
-				}
-				while (*str)
-				{
-					_putchar(*str);
-					str++;
-					count++;
-				}
-				format += 2; /* move past "%s" */
-			}
-			else if (*(format + 1) == '%')
-			{
-				_putchar('%');
-				format += 2;
-				count++;
-			}
-			else if (*(format + 1) == 'd' || *(format + 1) == 'i')
-			{
-				int num = va_arg(ars, int);
-				i += _printintdg(num);
-			}
-			else
-			{
-				/* invalid specifier or no specifier, print '%' */
-				_putchar(*format);
-				format++;
-				count++;
-			}
-		else
-		{
-			/* regular character, print as is */
-			_putchar(*format);
-			format++;
-			count++;
-		}
-	}
-	va_end(ars);
-	return (count);
+	else
+		ft_putchar(c, len);
 }
 
-/**
- * _putchar - writes the character c to stdout
- * @c: the character to print
- *
- * Return: on success 1.
- * On error, -1 is returned, and errno is set appropriately.
- */
-int _putchar(char c)
+int	ft_printf(const char *format, ...)
 {
-	return (write(1, &c, 1));
+	va_list	args;
+	int		len;
+
+	len = 0;
+	va_start(args, format);
+	while (*format)
+	{
+		if (*format == '%')
+		{
+			format++;
+			ft_flag_checker(args, *format, &len);
+		}
+		else
+			ft_putchar(*format, &len);
+		format++;
+	}
+	va_end(args);
+	return (len);
 }
