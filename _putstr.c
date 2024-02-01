@@ -1,24 +1,12 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yregragu <yregragu@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/20 16:01:28 by yregragu          #+#    #+#             */
-/*   Updated: 2023/12/22 19:20:55 by yregragu         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "main.h"
 
-#include "ft_printf.h"
-
-void	ft_putstr(char *s, int *len)
+void	_putstr(char *s, int *len)
 {
 	if (!s)
-		ft_putstr("(null)", len);
+		_putstr("(null)", len);
 	while (s && *s)
 	{
-		ft_putchar(*s, len);
+		_putchar(*s, len);
 		s++;
 	}
 }

@@ -1,41 +1,30 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yregragu <yregragu@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/15 16:32:45 by yregragu          #+#    #+#             */
-/*   Updated: 2023/12/26 18:47:13 by yregragu         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "main.h"
 
-static void	ft_flag_checker(va_list args, char c, int *len)
+static void	_flag_checker(va_list args, char c, int *len)
 {
 	if (c == '%')
-		ft_putchar('%', len);
+		_putchar('%', len);
 	else if (c == 'c')
-		ft_putchar(va_arg(args, int), len);
+		_putchar(va_arg(args, int), len);
 	else if (c == 's')
-		ft_putstr(va_arg(args, char *), len);
+		_putstr(va_arg(args, char *), len);
 	else if (c == 'u')
-		ft_putnbr(va_arg(args, unsigned int), len);
+		_putnbr(va_arg(args, unsigned int), len);
 	else if (c == 'i' || c == 'd')
-		ft_putnbr(va_arg(args, int), len);
+		_putnbr(va_arg(args, int), len);
 	else if (c == 'x' || c == 'X')
-		ft_putnbr_base(va_arg(args, unsigned long), c, len);
+		_putnbr_base(va_arg(args, unsigned long), c, len);
 	else if (c == 'p')
 	{
-		ft_putstr("0x", len);
-		ft_putnbr_base(va_arg(args, unsigned long int), c, len);
+		_putstr("0x", len);
+		_putnbr_base(va_arg(args, unsigned long int), c, len);
 	}
 	else
-		ft_putchar(c, len);
+		_putchar(c, len);
 }
 
-int	ft_printf(const char *format, ...)
+int	_printf(const char *format, ...)
 {
 	va_list	args;
 	int		len;
@@ -50,7 +39,7 @@ int	ft_printf(const char *format, ...)
 			ft_flag_checker(args, *format, &len);
 		}
 		else
-			ft_putchar(*format, &len);
+			_putchar(*format, &len);
 		format++;
 	}
 	va_end(args);
