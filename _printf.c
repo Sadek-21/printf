@@ -1,4 +1,3 @@
-
 #include "main.h"
 
 static void	_flag_checker(va_list args, char c, int *len)
@@ -36,7 +35,7 @@ int	_printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			ft_flag_checker(args, *format, &len);
+			_flag_checker(args, *format, &len);
 		}
 		else
 			_putchar(*format, &len);
