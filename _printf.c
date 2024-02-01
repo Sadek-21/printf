@@ -1,5 +1,15 @@
 #include "main.h"
 
+/*
+ * _flag_checker - checks and handles format specifiers for printf
+ * @args: va_list containing the variable arguments
+ * @c: format specifier character
+ * @len: pointer to the length variable for tracking output length
+ *
+ * This function checks the format specifier character and calls the
+ * appropriate function to handle the argument.
+ */
+
 static void	_flag_checker(va_list args, char c, int *len)
 {
 	if (c == '%')
@@ -22,6 +32,17 @@ static void	_flag_checker(va_list args, char c, int *len)
 	else
 		_putchar(c, len);
 }
+
+/**
+ * _printf - custom printf function
+ * @format: format string containing format specifiers
+ *
+ * This function emulates the behavior of the standard printf function.
+ * It supports a subset of format specifiers including %c, %s, %u, %d, %i,
+ * %x, %X, and %p.
+ *
+ * Return: The number of characters printed (excluding null byte).
+ */
 
 int	_printf(const char *format, ...)
 {
