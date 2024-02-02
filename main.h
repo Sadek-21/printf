@@ -10,4 +10,4 @@ void	_putstr(char *s, int *len);
 void	_putnbr_base(unsigned long n, char c, int *len);
 void	_putnbr(long n, int *len);
 
-#endif
+#endif/* MAIN_H */

@@ -53,6 +53,7 @@ int	_printf(const char *format, ...)
 		{
 			format++;
 			_flag_checker(args, *format, &len);
+			len += 2;
 		}
 		else
 			_putchar(*format, &len);
