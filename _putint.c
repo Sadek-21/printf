@@ -3,12 +3,12 @@
 #include <stdarg.h>
 
 /**
-* print_int - print number
+* putint - print number
 * @n: va_list
 *
 * Return: count.
 */
-int print_int(va_list n)
+int _putint(va_list n)
 {
 	int a[10];
 	int j, m, i, sum, count;
@@ -40,4 +40,3 @@ int print_int(va_list n)
 	}
 	return (count);
 }
-

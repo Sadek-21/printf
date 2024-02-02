@@ -3,12 +3,12 @@
 #include <stdarg.h>
 
 /**
-  * print_c - print characters
+  * putc.c - print characters
   * @c: va_list
   *
   * Return: 1.
   */
-int print_c(va_list c)
+int _putc.c(va_list c)
 {
 	_putchar(va_arg(c, int));
 

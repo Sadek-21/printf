@@ -2,12 +2,12 @@
 #include <stdlib.h>
 #include <stdarg.h>
 /**
-* print_num - print number
+* putnbr - print number
 * @n: va_list
 *
 * Return: count.
 */
-int print_num(va_list n)
+int _putnbr(va_list n)
 {
 	long int num;
 	int next_num, counter = 0, next;

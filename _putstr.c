@@ -4,12 +4,12 @@
 #include <unistd.h>
 #include <stdio.h>
 /**
- * print_string - print a string
+ * _putstr - print a string
  * @s: va_list
  *
  * Return: the character otherwise (NULL)
  */
-int print_string(va_list s)
+int _putstr.c(va_list s)
 {
 	char *my_str;
 	int d;

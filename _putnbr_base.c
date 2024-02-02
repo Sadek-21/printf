@@ -2,12 +2,12 @@
 #include "main.h"
 
 /**
- * print_dec - prints decimal numbers.
+ * _putnbr_base - prints decimal numbers.
  * @dec: number that is to be printed.
  *
  * Return: count.
  */
-int print_dec(va_list dec)
+int _putnbr_base(va_list dec)
 {
 	int a[10];
 	int j, m, n;
