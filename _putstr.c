@@ -1,18 +1,32 @@
+#include <stdarg.h>
 #include "main.h"
-
-/*
- * _putstr - Prints a string to the standard output.
- * @s: Pointer to the string to be printed.
- * @len: Pointer to the length variable for tracking output length.
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdio.h>
+/**
+ * print_string - print a string
+ * @s: va_list
+ *
+ * Return: the character otherwise (NULL)
  */
-
-void	_putstr(char *s, int *len)
+int print_string(va_list s)
 {
-	if (!s)
-		_putstr("(null)", len);
-	while (s && *s)
+	char *my_str;
+	int d;
+
+	my_str = va_arg(s, char*);
+
+	if (my_str == NULL)
 	{
-		_putchar(*s, len);
-		s++;
+		write(1, "(null)", 6);
+		return (6);
 	}
+	else
+	{
+		for (d = 0; my_str[d] != '\0'; d++)
+		{
+			_putchar(my_str[d]);
+		}
+	}
+	return (d);
 }

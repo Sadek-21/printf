@@ -1,63 +1,52 @@
+#include <stdarg.h>
+#include <stddef.h>
+#include <stdlib.h>
+#include <stdio.h>
 #include "main.h"
-
-/*
- * _flag_checker - Checks and handles format specifiers for printf.
- * @args: va_list containing the variable arguments.
- * @c: Format specifier character.
- * @len: Pointer to the length variable for tracking output length.
- */
-static void	_flag_checker(va_list args, char c, int *len)
-{
-	if (c == '%')
-		_putchar('%', len);
-	else if (c == 'c')
-		_putchar(va_arg(args, int), len);
-	else if (c == 's')
-		_putstr(va_arg(args, char *), len);
-	else if (c == 'u')
-		_putnbr(va_arg(args, unsigned int), len);
-	else if (c == 'i' || c == 'd')
-		_putnbr(va_arg(args, int), len);
-	else if (c == 'x' || c == 'X')
-		_putnbr_base(va_arg(args, unsigned long), c, len);
-	else if (c == 'p')
-	{
-		_putstr("0x", len);
-		_putnbr_base(va_arg(args, unsigned long int), c, len);
-	}
-	else
-		_putchar(c, len);
-}
-
 /**
- * _printf - custom printf function
- * @format: format string containing format specifiers
- *
- * This function emulates the behavior of the standard printf function.
- * It supports a subset of format specifiers including %c, %s, %u, %d, %i,
- * %x, %X, and %p.
- *
- * Return: The number of characters printed (excluding null byte).
- */
-
-int	_printf(const char *format, ...)
+* _printf - all of the logic for the printf project.
+* @format: string specifier formats.
+*
+* Return: Gives The length(char_num++).
+*/
+int _printf(const char *format, ...)
 {
-	va_list	args;
-	int		len;
+	va_list ap;
+	unsigned int i = 0, char_num = 0;
 
-	len = 0;
-	va_start(args, format);
-	while (*format)
+	if (!format)
+		return (-1);
+	va_start(ap, format);
+	for (i = 0; format[i] != '\0'; i++)
 	{
-		if (*format == '%')
+		if (format[i] == '%')
 		{
-			format++;
-			_flag_checker(args, *format, &len);
+			if (format[i + 1] == '\0')
+				return (-1);
+			else if (format[i + 1] == '%')
+			{
+				_putchar('%');
+				char_num++;
+				i++;
+			}
+			else if (func(format[i + 1]) != NULL)
+			{
+				char_num += (func(format[i + 1]))(ap);
+				i++;
+			}
+			else
+			{
+				_putchar(format[i]);
+				char_num++;
+			}
 		}
 		else
-			_putchar(*format, &len);
-		format++;
+		{
+			_putchar(format[i]);
+			char_num++;
+		}
 	}
-	va_end(args);
-	return (len);
+	return (char_num);
+	va_end(ap);
 }
+

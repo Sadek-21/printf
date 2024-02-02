@@ -1,28 +1,28 @@
-#include <stdarg.h>
 #include "main.h"
+#include <stdlib.h>
+#include <stdarg.h>
 
 /**
- * print_dec - prints decimal numbers.
- * @dec: number that is to be printed.
- *
- * Return: count.
- */
-int print_dec(va_list dec)
+* print_int - print number
+* @n: va_list
+*
+* Return: count.
+*/
+int print_int(va_list n)
 {
 	int a[10];
-	int j, m, n;
-	int sum, count = 0;
-	n = va_arg(dec, int);
+	int j, m, i, sum, count;
 
+	i = va_arg(n, int);
+	count = 0;
 	m = 1000000000;
-	a[0] = n / m;
-
+	a[0] = i / m;
 	for (j = 1; j < 10; j++)
 	{
-		m /= 10;
-		a[j] = (n / m) % 10;
+		m = m / 10;
+		a[j] = (i / m) % 10;
 	}
-	if (n < 0)
+	if (i < 0)
 	{
 		_putchar('-');
 		count++;
@@ -40,3 +40,4 @@ int print_dec(va_list dec)
 	}
 	return (count);
 }
+
