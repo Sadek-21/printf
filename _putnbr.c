@@ -40,4 +40,3 @@ int print_num(va_list n)
 	}
 	return (counter++);
 }
-
